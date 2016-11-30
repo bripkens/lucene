@@ -1,6 +1,6 @@
 {
   "name": "lucene-query-parser",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Lucene Query Parser for Javascript created using PEG.js",
   "main": "lib/lucene-query-parser.js",
   "scripts": {
@@ -23,16 +23,18 @@
     "email": "thoward37@gmail.com",
     "url": "http://github.com/thoward"
   },
-  "contributors": [
-    {
-      "name": "Eugeny Vlasenko",
-      "email": "mahnunchik@gmail.com",
-      "url": "http://mahnunchik.tumblr.com/"
-    }
-  ],
+  "contributors": [{
+    "name": "Eugeny Vlasenko",
+    "email": "mahnunchik@gmail.com",
+    "url": "http://mahnunchik.tumblr.com/"
+  }, {
+    "name": "Ilnur Khalilov",
+    "email": "ilnur.khalilov@gmail.com",
+    "url": "https://github.com/xomyaq"
+  }],
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/thoward/lucene-query-parser.js/issues"
+    "url": "https://github.com/xomyaq/lucene-query-parser.js/issues"
   },
   "dependencies": {
     "amdefine": ">=0.0.2"

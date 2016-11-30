@@ -5,7 +5,7 @@
  * This grammar supports many of the constructs contained in the Lucene Query Syntax.
  *
  * Supported features:
- * - conjunction operators (AND, OR, ||, &&, NOT)
+ * - conjunction operators (AND, OR, ||, &&, NOT, AND NOT, OR NOT)
  * - prefix operators (+, -)
  * - quoted values ("foo bar")
  * - named fields (foo:bar)
@@ -284,11 +284,14 @@ operator_exp
     }
 
 operator
-  = 'OR'
+  = 'OR NOT'
+  / 'AND NOT'
+  / 'OR'
   / 'AND'
   / 'NOT'
   / '||' { return 'OR'; }
   / '&&' { return 'AND'; }
+  / '!' { return 'NOT'; }
 
 prefix_operator_exp
   = _* operator:prefix_operator
