@@ -489,10 +489,9 @@ describe("lucenequeryparser: Lucene Query syntax documentation examples", functi
     it('parses example: NOT "jakarta apache"', function() {
         var results = lucenequeryparser.parse('NOT "jakarta apache"');
 
-        // not a valid query, so operator is ignored.
         expect(results['left']['field']).toBe('<implicit>');
         expect(results['left']['term']).toBe('jakarta apache');
-        expect(results['operator']).toBe(undefined);
+        expect(results['operator']).toBe('NOT');
     });
 
     it('parses example: "jakarta apache" -"Apache Lucene"', function() {

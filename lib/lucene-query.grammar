@@ -91,17 +91,23 @@ node
     {
         return {
             'operator': operator
-            };
+        };
     }
   / operator:operator_exp right:node
     {
-        return right;
+        var node = Object.assign({}, right);
+
+        if (operator === 'NOT') {
+            node.operator = operator;
+        }
+
+        return node;
     }
   / left:group_exp operator:operator_exp* right:node*
     {
         var node= {
             'left':left
-            };
+        };
 
         var right =
                 right.length == 0
@@ -110,9 +116,8 @@ node
                     ? right[0]['left']
                     : right[0];
 
-        if (right != null)
-        {
-            node['operator'] = operator==''? '<implicit>' : operator[0];
+        if (right != null) {
+            node['operator'] = operator == '' ? '<implicit>' : operator[0];
             node['right'] = right;
         }
 
@@ -308,3 +313,4 @@ _ "whitespace"
 
 EOF
   = !.
+
