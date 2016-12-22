@@ -1,6 +1,6 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 
-define(["../lib/lucene-query-parser.js"], function(lucenequeryparser) {
+define(["../lib/lucene-queryparser.js"], function(lucenequeryparser) {
   describe("lucenequeryparser: whitespace handling", function() {
 
     // term parsing

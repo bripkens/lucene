@@ -1,16 +1,17 @@
 {
-  "name": "lucene-query-parser",
-  "version": "1.1.0",
+  "name": "lucene-queryparser",
+  "version": "1.0.0",
   "description": "Lucene Query Parser for Javascript created using PEG.js",
-  "main": "lib/lucene-query-parser.js",
+  "main": "lib/lucene-queryparser.js",
+  "files": "lib/lucene-queryparser.js",
   "scripts": {
-    "build": "PEG_OUT=`cat lib/lucene-query.grammar | node_modules/pegjs/bin/pegjs` && printf \"if (typeof define !== 'function') { var define = require('amdefine')(module) };\n\ndefine([], function() { \nvar module = {};\n%s\nreturn module.exports;\n});\n\"  \"$PEG_OUT\" > ./lib/lucene-query-parser.js",
+    "build": "PEG_OUT=`cat lib/lucene-query.grammar | node_modules/pegjs/bin/pegjs` && printf \"if (typeof define !== 'function') { var define = require('amdefine')(module) };\n\ndefine([], function() { \nvar module = {};\n%s\nreturn module.exports;\n});\n\"  \"$PEG_OUT\" > ./lib/lucene-queryparser.js",
     "test": "./node_modules/.bin/jasmine-node ./spec/ --verbose",
     "prepublish": "npm run-script build && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thoward/lucene-query-parser.js.git"
+    "url": "git://github.com/xomyaq/lucene-queryparser.git"
   },
   "keywords": [
     "lucene",
@@ -34,7 +35,7 @@
   }],
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/xomyaq/lucene-query-parser.js/issues"
+    "url": "https://github.com/xomyaq/lucene-queryparser/issues"
   },
   "dependencies": {
     "amdefine": ">=0.0.2"
