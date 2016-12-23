@@ -98,8 +98,6 @@ node
         var node = {
             'start': start,
             'left': left,
-            'operator': operator,
-            'right': right
         };
 
         var right =

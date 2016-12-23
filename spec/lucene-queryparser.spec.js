@@ -492,6 +492,8 @@ describe("lucenequeryparser: Lucene Query syntax documentation examples", functi
         expect(results['left']['field']).toBe('<implicit>');
         expect(results['left']['term']).toBe('jakarta apache');
         expect(results['start']).toBe('NOT');
+        expect(results['right']).toBeUndefined();
+        expect(results['operator']).toBeUndefined();
     });
 
     it('parses example: "jakarta apache" -"Apache Lucene"', function() {
