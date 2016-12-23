@@ -93,19 +93,36 @@ node
             'operator': operator
         };
     }
-  / operator:operator_exp right:node
+  / start:operator_exp left:group_exp operator:operator_exp* right:node*
     {
-        var node = Object.assign({}, right);
+        var node = {
+            'start': start,
+            'left': left,
+            'operator': operator,
+            'right': right
+        };
 
-        if (operator === 'NOT') {
-            node.operator = operator;
+        var right =
+                right.length == 0
+                ? null
+                : right[0]['right'] == null
+                    ? right[0]['left']
+                    : right[0];
+
+        if (right != null) {
+            node['operator'] = operator == '' ? '<implicit>' : operator[0];
+            node['right'] = right;
         }
 
         return node;
     }
+  / operator:operator_exp right:node
+    {
+        return right;
+    }
   / left:group_exp operator:operator_exp* right:node*
     {
-        var node= {
+        var node = {
             'left':left
         };
 
@@ -313,4 +330,5 @@ _ "whitespace"
 
 EOF
   = !.
+
 

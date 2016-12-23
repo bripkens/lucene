@@ -491,7 +491,7 @@ describe("lucenequeryparser: Lucene Query syntax documentation examples", functi
 
         expect(results['left']['field']).toBe('<implicit>');
         expect(results['left']['term']).toBe('jakarta apache');
-        expect(results['operator']).toBe('NOT');
+        expect(results['start']).toBe('NOT');
     });
 
     it('parses example: "jakarta apache" -"Apache Lucene"', function() {
@@ -542,6 +542,23 @@ describe("lucenequeryparser: Lucene Query syntax documentation examples", functi
         expect(results['operator']).toBe('AND NOT');
         expect(results['right']['field']).toBe('<implicit>');
         expect(results['right']['term']).toBe('yamaha');
+    });
+
+    it('parses example: NOT (java OR python) AND android', function() {
+        var results = lucenequeryparser.parse('NOT (java OR python) AND android');
+        var leftNode = results['left'];
+
+        expect(results['start']).toBe('NOT');
+
+        expect(leftNode['left']['field']).toBe('<implicit>');
+        expect(leftNode['left']['term']).toBe('java');
+        expect(leftNode['operator']).toBe('OR');
+        expect(leftNode['right']['field']).toBe('<implicit>');
+        expect(leftNode['right']['term']).toBe('python');
+
+        expect(results['operator']).toBe('AND');
+        expect(results['right']['field']).toBe('<implicit>');
+        expect(results['right']['term']).toBe('android');
     });
   });
 });
