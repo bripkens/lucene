@@ -225,11 +225,13 @@ describe("lucenequeryparser: parentheses groups", function() {
 
         expect(results['left']['term']).toBe('fizz');
         expect(results['operator']).toBe('<implicit>');
+        expect(results['parenthesized']).toBe(undefined);
 
         var rightNode = results['right'];
 
         expect(rightNode['left']['term']).toBe('buzz');
         expect(rightNode['operator']).toBe('<implicit>');
+        expect(rightNode['parenthesized']).toBe(true);
         expect(rightNode['right']['term']).toBe('baz');
     });
 
