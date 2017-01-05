@@ -7,7 +7,7 @@ This is an implementation of the Lucene Query Parser developed using PEG.js.
 A quick example of how to use it:
 
 ```javascript
-var parser = require('lucene-query-parser');
+var parser = require('lucene-queryparser');
 
 // return the expression tree
 var results = parser.parse('title:"The Right Way" AND text:go');
@@ -22,7 +22,7 @@ console.log(results['right']['term']);      // go
 A slightly more complicated example:
 
 ```javascript
-var parser = require('lucene-query-parser');
+var parser = require('lucene-queryparser');
 
 // return the expression tree
 var results = parser.parse('test AND (foo OR bar)');
