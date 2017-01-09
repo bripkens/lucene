@@ -1,47 +1,37 @@
 {
-  "name": "lucene-queryparser",
-  "version": "2.0.1",
-  "description": "Lucene Query Parser for Javascript created using PEG.js",
-  "main": "lib/lucene-queryparser.js",
-  "files": "lib/lucene-queryparser.js",
+  "name": "lucene",
+  "version": "0.1.0",
+  "description": "Lucene query parser and formatter for JavaScript created using PEG.js",
+  "main": "lib/lucene.js",
+  "files": "lib/lucene.js",
   "scripts": {
-    "build": "PEG_OUT=`cat lib/lucene-query.grammar | node_modules/pegjs/bin/pegjs` && printf \"if (typeof define !== 'function') { var define = require('amdefine')(module) };\n\ndefine([], function() { \nvar module = {};\n%s\nreturn module.exports;\n});\n\"  \"$PEG_OUT\" > ./lib/lucene-queryparser.js",
-    "test": "./node_modules/.bin/jasmine-node ./spec/ --verbose",
-    "prepublish": "npm run-script build && npm test"
+    "build": "cat lib/lucene.grammar | pegjs > ./lib/queryParser.js",
+    "test": "mocha",
+    "prepublish": "npm run build && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/xomyaq/lucene-queryparser.git"
+    "url": "git://github.com/bripkens/lucene.git"
   },
   "keywords": [
     "lucene",
     "query",
     "parser",
-    "pegjs"
+    "pegjs",
+    "formatter"
   ],
   "author": {
-    "name": "Troy Howard",
-    "email": "thoward37@gmail.com",
-    "url": "http://github.com/thoward"
+    "name": "Ben Ripkens",
+    "email": "bripkens@gmail.com",
+    "url": "http://github.com/bripkens"
   },
-  "contributors": [{
-    "name": "Eugeny Vlasenko",
-    "email": "mahnunchik@gmail.com",
-    "url": "http://mahnunchik.tumblr.com/"
-  }, {
-    "name": "Ilnur Khalilov",
-    "email": "ilnur.khalilov@gmail.com",
-    "url": "https://github.com/xomyaq"
-  }],
-  "license": "Apache 2.0",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xomyaq/lucene-queryparser/issues"
-  },
-  "dependencies": {
-    "amdefine": ">=0.0.2"
+    "url": "https://github.com/bripkens/lucene/issues"
   },
   "devDependencies": {
-    "pegjs": "0.7.x",
-    "jasmine-node": "1.10.x"
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "pegjs": "0.7.x"
   }
 }
