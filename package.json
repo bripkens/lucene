@@ -6,7 +6,7 @@
   "files": "lib/lucene.js",
   "scripts": {
     "build": "cat lib/lucene.grammar | pegjs > ./lib/queryParser.js",
-    "test": "mocha",
+    "test": "npm run build && mocha",
     "prepublish": "npm run build && npm test"
   },
   "repository": {
