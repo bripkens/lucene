@@ -1,9 +1,11 @@
 {
   "name": "lucene",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Lucene query parser and formatter for JavaScript created using PEG.js",
   "main": "lib/lucene.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "cat lib/lucene.grammar | pegjs > ./lib/queryParser.js",
     "test": "npm run build && mocha",
