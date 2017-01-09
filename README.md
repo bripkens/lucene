@@ -1,4 +1,8 @@
-# Lucene Query Parsing and Formatting for JavaScript
+# lucene &nbsp; [![Build Status](https://travis-ci.org/bripkens/lucene.svg?branch=master)](https://travis-ci.org/bripkens/lucene) [![Dependency Status](https://david-dm.org/bripkens/lucene/master.svg)](https://david-dm.org/bripkens/lucene/master) [![npm version](https://badge.fury.io/js/lucene.svg)](https://badge.fury.io/js/lucene)
+
+Parse, modify and stringify lucene queries.
+
+---
 
 ## Installation
 
