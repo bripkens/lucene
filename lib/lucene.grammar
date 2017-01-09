@@ -26,6 +26,8 @@
  *     'operator': string,      // operator value
  *     'right': dictionary,     // field expression OR node
  *     'field': string          // field name (for field group syntax) [OPTIONAL]
+ *     'parenthesized': boolean // whether or not the expression was placed in parentheses
+ *                              // in the input
  * }
  *
  *
@@ -34,6 +36,7 @@
  * {
  *     'field': string,         // field name
  *     'term': string,          // term value
+ *     'quoted': boolean,       // whether or not the value was quoted in the input string
  *     'prefix': string         // prefix operator (+/-) [OPTIONAL]
  *     'boost': float           // boost value, (value > 1 must be integer) [OPTIONAL]
  *     'similarity': float      // similarity value, (value must be > 0 and < 1) [OPTIONAL]
@@ -192,7 +195,10 @@ fieldname
 term
   = op:prefix_operator_exp? term:quoted_term proximity:proximity_modifier? boost:boost_modifier? _*
       {
-        var result = { 'term': term };
+        var result = {
+          'term': term,
+          'quoted': true
+        };
 
         if('' != proximity)
         {
@@ -211,7 +217,10 @@ term
     }
   / op:prefix_operator_exp? term:unquoted_term similarity:fuzzy_modifier? boost:boost_modifier? _*
     {
-        var result = { 'term': term };
+        var result = {
+          'term': term,
+          'quoted': false
+        };
         if('' != similarity)
         {
             result['similarity'] = similarity;

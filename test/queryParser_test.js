@@ -218,7 +218,6 @@ describe('queryParser', () => {
   });
 
   describe('parentheses groups', () => {
-
     it('parses parentheses group', () => {
       var results = lucene.parse('fizz (buzz baz)');
 
