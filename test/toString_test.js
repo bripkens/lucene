@@ -127,6 +127,98 @@ describe('toString', () => {
     testStr('foo:{bar TO baz}');
   });
 
+  it('must support lucene example: title:"The Right Way" AND text:go', () => {
+    testStr('title:"The Right Way" AND text:go');
+  });
+
+  it('must support lucene example: title:"Do it right" AND right', () => {
+    testStr('title:"Do it right" AND right');
+  });
+
+  it('must support lucene example: title:Do it right', () => {
+    testStr('title:Do it right');
+  });
+
+  it('must support lucene example: te?t', () => {
+    testStr('te?t');
+  });
+
+  it('must support lucene example: test*', () => {
+    testStr('test*');
+  });
+
+  it('must support lucene example: te*t', () => {
+    testStr('te*t');
+  });
+
+  it('must support lucene example: roam~', () => {
+    testStr('roam~');
+  });
+
+  it('must support lucene example: roam~0.8', () => {
+    testStr('roam~0.8');
+  });
+
+  it('must support lucene example: "jakarta apache"~10', () => {
+    testStr('"jakarta apache"~10');
+  });
+
+  it('must support lucene example: mod_date:[20020101 TO 20030101]', () => {
+    testStr('mod_date:[20020101 TO 20030101]');
+  });
+
+  it('must support lucene example: title:{Aida TO Carmen}', () => {
+    testStr('title:{Aida TO Carmen}');
+  });
+
+  it('must support lucene example: jakarta apache', () => {
+    testStr('jakarta apache');
+  });
+
+  it('must support lucene example: jakarta^4 apache', () => {
+    testStr('jakarta^4 apache');
+  });
+
+  it('must support lucene example: "jakarta apache"^4 "Apache Lucene"', () => {
+    testStr('"jakarta apache"^4 "Apache Lucene"');
+  });
+
+  it('must support lucene example: "jakarta apache" jakarta', () => {
+    testStr('"jakarta apache" jakarta');
+  });
+
+  it('must support lucene example: "jakarta apache" OR jakarta', () => {
+    testStr('"jakarta apache" OR jakarta');
+  });
+
+  it('must support lucene example: "jakarta apache" AND "Apache Lucene"', () => {
+    testStr('"jakarta apache" AND "Apache Lucene"');
+  });
+
+  it('must support lucene example: +jakarta lucene', () => {
+    testStr('+jakarta lucene');
+  });
+
+  it('must support lucene example: "jakarta apache" NOT "Apache Lucene"', () => {
+    testStr('"jakarta apache" NOT "Apache Lucene"');
+  });
+
+  it('must support lucene example: NOT "jakarta apache"', () => {
+    testStr('NOT "jakarta apache"');
+  });
+
+  it('must support lucene example: "jakarta apache" -"Apache Lucene"', () => {
+    testStr('"jakarta apache" -"Apache Lucene"');
+  });
+
+  it('must support lucene example: (jakarta OR apache) AND website', () => {
+    testStr('(jakarta OR apache) AND website');
+  });
+
+  it('must support lucene example: title:(+return +"pink panther")', () => {
+    testStr('title:(+return +"pink panther")');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected);
   }
