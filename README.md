@@ -24,7 +24,8 @@ npm install --save lucene
 ```javascript
 const lucene = require('lucene');
 
-console.log(lucene.parse('name:frank OR job:engineer'));
+const ast = lucene.parse('name:frank OR job:engineer');
+console.log(ast);
 // {
 //   left: {
 //     field: 'name',
@@ -36,6 +37,9 @@ console.log(lucene.parse('name:frank OR job:engineer'));
 //     term: 'engineer'
 //   }
 // }
+
+console.log(lucene.toString(ast));
+// name:frank OR job:engineer
 ```
 
 
