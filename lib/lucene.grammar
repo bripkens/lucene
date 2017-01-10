@@ -319,9 +319,9 @@ operator
   / 'OR'
   / 'AND'
   / 'NOT'
-  / '||' { return 'OR'; }
-  / '&&' { return 'AND'; }
-  / '!' { return 'NOT'; }
+  / '||'
+  / '&&'
+  / '!'
 
 prefix_operator_exp
   = _* operator:prefix_operator
