@@ -206,7 +206,7 @@ describe('queryParser', () => {
       var results = lucene.parse('fizz && buzz');
 
       expect(results['left']['term']).to.equal('fizz');
-      expect(results['operator']).to.equal('AND');
+      expect(results['operator']).to.equal('&&');
       expect(results['right']['term']).to.equal('buzz');
     });
 
@@ -214,7 +214,7 @@ describe('queryParser', () => {
       var results = lucene.parse('fizz || buzz');
 
       expect(results['left']['term']).to.equal('fizz');
-      expect(results['operator']).to.equal('OR');
+      expect(results['operator']).to.equal('||');
       expect(results['right']['term']).to.equal('buzz');
     });
   });
@@ -260,7 +260,7 @@ describe('queryParser', () => {
       expect(results['left']['inclusive']).to.equal(true);
     });
 
-    it('parses inclusive range expression', () => {
+    it('parses exclusive range expression', () => {
       var results = lucene.parse('foo:{bar TO baz}');
 
       expect(results['left']['field']).to.equal('foo');
