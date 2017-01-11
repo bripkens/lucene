@@ -2,16 +2,13 @@
 
 Parse, modify and stringify lucene queries.
 
+**[Installation](#installation) |**
+**[Try It](https://runkit.com/npm/lucene) |**
+**[Usage](#usage) |**
+**[Grammar](#grammar) |**
+**[History](#history)**
+
 ---
-
-<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Grammar](#grammar)
-- [History](#history)
-
-<!-- /TOC -->
 
 ## Installation
 
