@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - Upgrade to pegjs 0.8
+
 ## 1.1.1
  - Do not require ES2015 features.
 

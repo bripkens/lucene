@@ -160,7 +160,7 @@ field_exp
   = fieldname:fieldname? range:range_operator_exp
     {
         range['field'] =
-            fieldname == ''
+            fieldname == '' || fieldname == null
                 ? "<implicit>"
                 : fieldname;
 
@@ -175,7 +175,7 @@ field_exp
     {
         var fieldexp = {
             'field':
-                fieldname == ''
+                fieldname == '' || fieldname == null
                     ? "<implicit>"
                     : fieldname
             };
@@ -266,7 +266,7 @@ boost_modifier
 fuzzy_modifier
   = '~' fuzziness:decimal_exp?
     {
-        return fuzziness == '' ? 0.5 : fuzziness;
+        return fuzziness == '' || fuzziness == null ? 0.5 : fuzziness;
     }
 
 decimal_or_int_exp

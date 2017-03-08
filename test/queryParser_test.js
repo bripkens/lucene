@@ -172,7 +172,6 @@ describe('queryParser', () => {
 
     it('parses implicit conjunction operator (OR)', () => {
       var results = lucene.parse('fizz buzz');
-
       expect(results['left']['term']).to.equal('fizz');
       expect(results['operator']).to.equal('<implicit>');
       expect(results['right']['term']).to.equal('buzz');
