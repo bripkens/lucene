@@ -90,4 +90,24 @@ describe.only('StringStream', () => {
       });
     });
   });
+
+  describe('eat', () => {
+    it('must eat substring when available', () => {
+      expect(stream.eat('hel')).to.deep.equal({
+        start: 0,
+        end: 3,
+        lexeme: 'hel'
+      });
+    });
+
+    it('must advance the stream the number of characters eaten', () => {
+      stream.eat('hel');
+      expect(stream.getPosition()).to.equal(3);
+    });
+
+    it('must return null when the substring does not match', () => {
+      expect(stream.eat('bar')).to.equal(null);
+      expect(stream.getPosition()).to.equal(0);
+    });
+  });
 });

@@ -99,6 +99,63 @@ describe.only('lexer/firstStage', () => {
     });
   });
 
+  describe('operators', () => {
+    it('must parse AND operator', () => {
+      expect(lexFirstStage('AND')).to.deep.equal([
+        {
+          token: 'operator',
+          lexeme: 'AND',
+          start: 0,
+          end: 3
+        }
+      ]);
+    });
+
+    it('must parse OR operator', () => {
+      expect(lexFirstStage('OR')).to.deep.equal([
+        {
+          token: 'operator',
+          lexeme: 'OR',
+          start: 0,
+          end: 2
+        }
+      ]);
+    });
+
+    it('must parse NOT operator', () => {
+      expect(lexFirstStage('NOT')).to.deep.equal([
+        {
+          token: 'operator',
+          lexeme: 'NOT',
+          start: 0,
+          end: 3
+        }
+      ]);
+    });
+
+    it('must parse + operator', () => {
+      expect(lexFirstStage('+')).to.deep.equal([
+        {
+          token: 'operator',
+          lexeme: '+',
+          start: 0,
+          end: 1
+        }
+      ]);
+    });
+
+    it('must parse - operator', () => {
+      expect(lexFirstStage('-')).to.deep.equal([
+        {
+          token: 'operator',
+          lexeme: '-',
+          start: 0,
+          end: 1
+        }
+      ]);
+    });
+  });
+
   describe('combinations', () => {
     it('must parse terms and phrases', () => {
       expect(lexFirstStage('foo "bar"')).to.deep.equal([
