@@ -210,6 +210,42 @@ describe.only('lexer/firstStage', () => {
     });
   });
 
+  describe('fuzzy', () => {
+    it('must parse fuzzyness without parameter', () => {
+      expect(lexFirstStage('bar~')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'bar',
+          start: 0,
+          end: 3
+        },
+        {
+          token: 'fuzzy',
+          lexeme: '~',
+          start: 3,
+          end: 4
+        }
+      ]);
+    });
+
+    it('must parse fuzzyness with parameter', () => {
+      expect(lexFirstStage('bar~0.8')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'bar',
+          start: 0,
+          end: 3
+        },
+        {
+          token: 'fuzzy',
+          lexeme: '~0.8',
+          start: 3,
+          end: 7
+        }
+      ]);
+    });
+  });
+
   describe('combinations', () => {
     it('must parse terms and phrases', () => {
       expect(lexFirstStage('foo "bar"')).to.deep.equal([
