@@ -109,5 +109,14 @@ describe.only('StringStream', () => {
       expect(stream.eat('bar')).to.equal(null);
       expect(stream.getPosition()).to.equal(0);
     });
+
+    it('must eat single characters', () => {
+      stream = new StringStream('+hello');
+      expect(stream.eat('+')).to.deep.equal({
+        start: 0,
+        end: 1,
+        lexeme: '+'
+      });
+    });
   });
 });

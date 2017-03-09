@@ -156,6 +156,30 @@ describe.only('lexer/firstStage', () => {
     });
   });
 
+  describe('grouping', () => {
+    it('must parse grouping start', () => {
+      expect(lexFirstStage('(')).to.deep.equal([
+        {
+          token: 'grouping',
+          lexeme: '(',
+          start: 0,
+          end: 1
+        }
+      ]);
+    });
+
+    it('must parse grouping end', () => {
+      expect(lexFirstStage(')')).to.deep.equal([
+        {
+          token: 'grouping',
+          lexeme: ')',
+          start: 0,
+          end: 1
+        }
+      ]);
+    });
+  });
+
   describe('combinations', () => {
     it('must parse terms and phrases', () => {
       expect(lexFirstStage('foo "bar"')).to.deep.equal([
@@ -199,6 +223,65 @@ describe.only('lexer/firstStage', () => {
           lexeme: '42',
           start: 8,
           end: 10
+        }
+      ]);
+    });
+
+    it('must support field grouping', () => {
+      expect(lexFirstStage('title:(+return +"pink panther")')).to.deep.equal([
+        {
+          'start': 0,
+          'end': 5,
+          'lexeme': 'title',
+          'token': 'term'
+        },
+        {
+          'start': 5,
+          'end': 6,
+          'lexeme': ':',
+          'token': 'fieldSeparator'
+        },
+        {
+          'start': 6,
+          'end': 7,
+          'lexeme': '(',
+          'token': 'grouping'
+        },
+        {
+          'start': 7,
+          'end': 8,
+          'lexeme': '+',
+          'token': 'operator'
+        },
+        {
+          'start': 8,
+          'end': 14,
+          'lexeme': 'return',
+          'token': 'term'
+        },
+        {
+          'start': 14,
+          'end': 15,
+          'lexeme': ' ',
+          'token': 'whitespace'
+        },
+        {
+          'start': 15,
+          'end': 16,
+          'lexeme': '+',
+          'token': 'operator'
+        },
+        {
+          'start': 16,
+          'end': 30,
+          'lexeme': '"pink panther"',
+          'token': 'phrase'
+        },
+        {
+          'start': 30,
+          'end': 31,
+          'lexeme': ')',
+          'token': 'grouping'
         }
       ]);
     });
