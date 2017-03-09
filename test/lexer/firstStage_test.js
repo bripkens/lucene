@@ -122,5 +122,28 @@ describe.only('lexer/firstStage', () => {
         }
       ]);
     });
+
+    it('must support fielded data', () => {
+      expect(lexFirstStage('foo.bar:42')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'foo.bar',
+          start: 0,
+          end: 7
+        },
+        {
+          token: 'fieldSeparator',
+          lexeme: ':',
+          start: 7,
+          end: 8
+        },
+        {
+          token: 'term',
+          lexeme: '42',
+          start: 8,
+          end: 10
+        }
+      ]);
+    });
   });
 });
