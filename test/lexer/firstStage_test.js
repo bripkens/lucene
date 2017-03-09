@@ -16,6 +16,28 @@ describe.only('lexer/firstStage', () => {
         }
       ]);
     });
+
+    it('must support the wildcard * within terms', () => {
+      expect(lexFirstStage('hell*o')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'hell*o',
+          start: 0,
+          end: 6
+        }
+      ]);
+    });
+
+    it('must support the wildcard ? within terms', () => {
+      expect(lexFirstStage('hell?o')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'hell?o',
+          start: 0,
+          end: 6
+        }
+      ]);
+    });
   });
 
   describe('phrases', () => {
@@ -241,6 +263,67 @@ describe.only('lexer/firstStage', () => {
           lexeme: '~0.8',
           start: 3,
           end: 7
+        }
+      ]);
+    });
+  });
+
+  describe('ranges', () => {
+    it('must parse ranges', () => {
+      expect(lexFirstStage('mod_date:[20020101 TO 20030101]')).to.deep.equal([
+        {
+          'start': 0,
+          'end': 8,
+          'lexeme': 'mod_date',
+          'token': 'term'
+        },
+        {
+          'start': 8,
+          'end': 9,
+          'lexeme': ':',
+          'token': 'fieldSeparator'
+        },
+        {
+          'start': 9,
+          'end': 10,
+          'lexeme': '[',
+          'token': 'range'
+        },
+        {
+          'start': 10,
+          'end': 18,
+          'lexeme': '20020101',
+          'token': 'term'
+        },
+        {
+          'start': 18,
+          'end': 19,
+          'lexeme': ' ',
+          'token': 'whitespace'
+        },
+        {
+          'start': 19,
+          'end': 21,
+          'lexeme': 'TO',
+          'token': 'term'
+        },
+        {
+          'start': 21,
+          'end': 22,
+          'lexeme': ' ',
+          'token': 'whitespace'
+        },
+        {
+          'start': 22,
+          'end': 30,
+          'lexeme': '20030101',
+          'token': 'term'
+        },
+        {
+          'start': 30,
+          'end': 31,
+          'lexeme': ']',
+          'token': 'range'
         }
       ]);
     });
