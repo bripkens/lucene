@@ -80,5 +80,14 @@ describe.only('StringStream', () => {
         lexeme: ''
       });
     });
+
+    it('must support functions as eat while param', () => {
+      stream = new StringStream('helLo');
+      expect(stream.eatWhile(c => c.toLowerCase() === c)).to.deep.equal({
+        start: 0,
+        end: 3,
+        lexeme: 'hel'
+      });
+    });
   });
 });
