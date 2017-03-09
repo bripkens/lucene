@@ -85,4 +85,42 @@ describe.only('lexer/firstStage', () => {
       ]);
     });
   });
+
+  describe('whitespace', () => {
+    it('must parse just whitespace', () => {
+      expect(lexFirstStage(' \n\t ')).to.deep.equal([
+        {
+          token: 'whitespace',
+          lexeme: ' \n\t ',
+          start: 0,
+          end: 4
+        }
+      ]);
+    });
+  });
+
+  describe('combinations', () => {
+    it('must parse terms and phrases', () => {
+      expect(lexFirstStage('foo "bar"')).to.deep.equal([
+        {
+          token: 'term',
+          lexeme: 'foo',
+          start: 0,
+          end: 3
+        },
+        {
+          token: 'whitespace',
+          lexeme: ' ',
+          start: 3,
+          end: 4
+        },
+        {
+          token: 'phrase',
+          lexeme: '"bar"',
+          start: 4,
+          end: 9
+        }
+      ]);
+    });
+  });
 });
