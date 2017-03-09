@@ -180,6 +180,36 @@ describe.only('lexer/firstStage', () => {
     });
   });
 
+  describe('boosting', () => {
+    it('must parse boosts', () => {
+      expect(lexFirstStage('^2')).to.deep.equal([
+        {
+          token: 'boost',
+          lexeme: '^2',
+          start: 0,
+          end: 2
+        }
+      ]);
+    });
+
+    it('must parse boost even when there is no boost value', () => {
+      expect(lexFirstStage('^bar')).to.deep.equal([
+        {
+          token: 'boost',
+          lexeme: '^',
+          start: 0,
+          end: 1
+        },
+        {
+          token: 'term',
+          lexeme: 'bar',
+          start: 1,
+          end: 4
+        }
+      ]);
+    });
+  });
+
   describe('combinations', () => {
     it('must parse terms and phrases', () => {
       expect(lexFirstStage('foo "bar"')).to.deep.equal([
