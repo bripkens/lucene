@@ -108,6 +108,74 @@ describe.only('lexer/firstStage', () => {
     });
   });
 
+  describe('regular expressions', () => {
+    it('must parse simple regular expressions', () => {
+      expect(lexFirstStage('/foo bar/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/foo bar/',
+          start: 0,
+          end: 9
+        }
+      ]);
+    });
+
+    it('must support escaped slashes', () => {
+      expect(lexFirstStage('/a\\/b/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/a\\/b/',
+          start: 0,
+          end: 6
+        }
+      ]);
+    });
+
+    it('must support escaped slashes at the end of a regex', () => {
+      expect(lexFirstStage('/a\\/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/a\\/',
+          start: 0,
+          end: 4
+        }
+      ]);
+    });
+
+    it('must ignore multiple escaped backslashes', () => {
+      expect(lexFirstStage('/a\\\\/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/a\\\\/',
+          start: 0,
+          end: 5
+        }
+      ]);
+    });
+
+    it('must consume to the end of the source when the regular expression does not end', () => {
+      expect(lexFirstStage('/a\\\\\\/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/a\\\\\\/',
+          start: 0,
+          end: 6
+        }
+      ]);
+    });
+
+    it('must support escaped backslash and normal backslash at the end', () => {
+      expect(lexFirstStage('/a\\\\\\/ abc/')).to.deep.equal([
+        {
+          token: 'regex',
+          lexeme: '/a\\\\\\/ abc/',
+          start: 0,
+          end: 11
+        }
+      ]);
+    });
+  });
+
   describe('whitespace', () => {
     it('must parse just whitespace', () => {
       expect(lexFirstStage(' \n\t ')).to.deep.equal([
