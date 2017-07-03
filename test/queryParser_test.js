@@ -570,4 +570,18 @@ describe('queryParser', () => {
       expect(() => lucene.parse('(foo:bar')).to.throw(/SyntaxError: Expected/);
     });
   });
+
+  describe('escaped sequences in quoted terms', () => {
+    it('must support simple quote escape', () => {
+      var results = lucene.parse('foo:"a\\"b"');
+      expect(results.left.field).to.equal('foo');
+      expect(results.left.term).to.equal('a"b');
+    });
+
+    it('must support multiple quoted terms', () => {
+      var results = lucene.parse('"a\\"b" "c\\"d"');
+      expect(results.left.term).to.equal('a"b');
+      expect(results.right.term).to.equal('c"d');
+    });
+  });
 });

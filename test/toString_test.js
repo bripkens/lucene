@@ -219,6 +219,10 @@ describe('toString', () => {
     testStr('title:(+return +"pink panther")');
   });
 
+  it('must support strings with quotes', () => {
+    testStr('foo:"start \\" end"');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected);
   }

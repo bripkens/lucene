@@ -2,6 +2,7 @@
 
 ## Unreleased
  - Upgrade to pegjs 0.8
+ - Support escaped characters in quoted strings.
 
 ## 1.1.1
  - Do not require ES2015 features.

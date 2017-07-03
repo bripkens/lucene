@@ -246,10 +246,31 @@ term_char
   = '.' / [^: \t\r\n\f\{\}()"/^~\[\]]
 
 quoted_term
-  = '"' term:[^"]+ '"'
-    {
-        return term.join('');
-    }
+  = '"' chars:DoubleStringCharacter* '"' { return chars.join(''); }
+
+DoubleStringCharacter
+  = !('"' / "\\") char:. { return char; }
+  / "\\" sequence:EscapeSequence { return sequence; }
+
+EscapeSequence
+  = "+"
+  / "-"
+  / "!"
+  / "("
+  / ")"
+  / "{"
+  / "}"
+  / "["
+  / "]"
+  / "^"
+  / "\""
+  / "?"
+  / ":"
+  / "\\"
+  / "&"
+  / "|"
+  / "'"
+  / "/"
 
 proximity_modifier
   = '~' proximity:int_exp
