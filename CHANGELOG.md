@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.3
  - Fix malformed `toString` output when using paranthesis.
 
 ## 1.1.2
