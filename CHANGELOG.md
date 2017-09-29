@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - Fix malformed `toString` output when using paranthesis.
+
 ## 1.1.2
  - Upgrade to pegjs 0.8
  - Support escaped characters in quoted strings.

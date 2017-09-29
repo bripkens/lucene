@@ -19,6 +19,10 @@ describe('toString', () => {
     testStr('foo:bar');
   });
 
+  it('must handle simple terms with explicit field name in round parentheses', () => {
+    testStr('foo:(bar)');
+  });
+
   it('must handle quoted terms', () => {
     testStr('"fizz buz"');
   });
@@ -79,8 +83,16 @@ describe('toString', () => {
     testStr('foo:-bar');
   });
 
+  it('must support prefixes and explicit field names in round parentheses (-)', () => {
+    testStr('foo:(-bar)');
+  });
+
   it('must support prefixes and explicit field names (+)', () => {
     testStr('foo:+bar');
+  });
+
+  it('must support prefixes and explicit field names in round parentheses (+)', () => {
+    testStr('foo:(+bar)');
   });
 
   it('must support quoted prefixes', () => {
