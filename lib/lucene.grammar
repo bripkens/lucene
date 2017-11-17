@@ -50,7 +50,7 @@
  *     'field': string,         // field name
  *     'term_min': string,      // minimum value (left side) of range
  *     'term_max': string,      // maximum value (right side) of range
- *     'inclusive': boolean     // inclusive ([...]) or exclusive ({...})
+ *     'inclusive': string     // inclusive ([...]) or exclusive ({...}) or mixed ({...],[...})
  * }
  *
  * Other Notes:
@@ -157,6 +157,9 @@ paren_exp
     }
 
 field_exp
+
+
+
   = fieldname:fieldname? range:range_operator_exp
     {
         range['field'] =
@@ -236,6 +239,15 @@ term
         return result;
     }
 
+rterm_char
+  = '.' / [^ \t\r\n\f\{\}()"/^~\[\]]
+
+ranged_term
+  = term:rterm_char+
+    {
+        return term.join('');
+    }
+
 unquoted_term
   = term:term_char+
     {
@@ -307,20 +319,36 @@ int_exp
     }
 
 range_operator_exp
-  = '[' term_min:unquoted_term _* 'TO' _+ term_max:unquoted_term ']'
+  = '[' term_min:ranged_term _* 'TO' _+ term_max:ranged_term ']'
     {
         return {
             'term_min': term_min,
             'term_max': term_max,
-            'inclusive': true
+            'inclusive': 'both'
         };
     }
-  / '{' term_min:unquoted_term _* 'TO' _+ term_max:unquoted_term '}'
+  / '{' term_min:ranged_term _* 'TO' _+ term_max:ranged_term '}'
     {
         return {
             'term_min': term_min,
             'term_max': term_max,
-            'inclusive': false
+            'inclusive': 'none'
+        };
+    }
+  / '[' term_min:ranged_term _* 'TO' _+ term_max:ranged_term '}'
+    {
+        return {
+            'term_min': term_min,
+            'term_max': term_max,
+            'inclusive': 'left'
+        };
+    }
+  / '{' term_min:ranged_term _* 'TO' _+ term_max:ranged_term ']'
+    {
+        return {
+            'term_min': term_min,
+            'term_max': term_max,
+            'inclusive': 'right'
         };
     }
 
