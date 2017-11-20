@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0
+ - Support mixed inclusive/exclusive range delimiters
+
 ## 1.1.3
  - Fix malformed `toString` output when using paranthesis.
 
