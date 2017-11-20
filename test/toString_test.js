@@ -139,6 +139,18 @@ describe('toString', () => {
     testStr('foo:{bar TO baz}');
   });
 
+  it('must support mixed range expressions (left inclusive)', () => {
+    testStr('foo:[bar TO baz}');
+  });
+
+  it('must support mixed range expressions (right inclusive)', () => {
+    testStr('foo:{bar TO baz]');
+  });
+
+  it('must support mixed range expressions (right inclusive) with date ISO format', () => {
+    testStr('date:{2017-11-17T01:32:45.123Z TO 2017-11-18T04:28:11.999Z]');
+  });
+
   it('must support lucene example: title:"The Right Way" AND text:go', () => {
     testStr('title:"The Right Way" AND text:go');
   });

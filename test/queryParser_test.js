@@ -256,7 +256,7 @@ describe('queryParser', () => {
       expect(results['left']['field']).to.equal('foo');
       expect(results['left']['term_min']).to.equal('bar');
       expect(results['left']['term_max']).to.equal('baz');
-      expect(results['left']['inclusive']).to.equal(true);
+      expect(results['left']['inclusive']).to.equal('both');
     });
 
     it('parses exclusive range expression', () => {
@@ -265,7 +265,34 @@ describe('queryParser', () => {
       expect(results['left']['field']).to.equal('foo');
       expect(results['left']['term_min']).to.equal('bar');
       expect(results['left']['term_max']).to.equal('baz');
-      expect(results['left']['inclusive']).to.equal(false);
+      expect(results['left']['inclusive']).to.equal('none');
+    });
+
+    it('parses mixed range expression (left inclusive)', () => {
+      var results = lucene.parse('foo:[bar TO baz}');
+
+      expect(results['left']['field']).to.equal('foo');
+      expect(results['left']['term_min']).to.equal('bar');
+      expect(results['left']['term_max']).to.equal('baz');
+      expect(results['left']['inclusive']).to.equal('left');
+    });
+
+    it('parses mixed range expression (right inclusive)', () => {
+      var results = lucene.parse('foo:{bar TO baz]');
+
+      expect(results['left']['field']).to.equal('foo');
+      expect(results['left']['term_min']).to.equal('bar');
+      expect(results['left']['term_max']).to.equal('baz');
+      expect(results['left']['inclusive']).to.equal('right');
+    });
+
+    it('parses mixed range expression (right inclusive) with date ISO format', () => {
+      var results = lucene.parse('date:{2017-11-17T01:32:45.123Z TO 2017-11-18T04:28:11.999Z]');
+
+      expect(results['left']['field']).to.equal('date');
+      expect(results['left']['term_min']).to.equal('2017-11-17T01:32:45.123Z');
+      expect(results['left']['term_max']).to.equal('2017-11-18T04:28:11.999Z');
+      expect(results['left']['inclusive']).to.equal('right');
     });
   });
 
@@ -393,7 +420,7 @@ describe('queryParser', () => {
       expect(results['left']['field']).to.equal('mod_date');
       expect(results['left']['term_min']).to.equal('20020101');
       expect(results['left']['term_max']).to.equal('20030101');
-      expect(results['left']['inclusive']).to.equal(true);
+      expect(results['left']['inclusive']).to.equal('both');
     });
 
     it('parses example: title:{Aida TO Carmen}', () => {
@@ -402,7 +429,7 @@ describe('queryParser', () => {
       expect(results['left']['field']).to.equal('title');
       expect(results['left']['term_min']).to.equal('Aida');
       expect(results['left']['term_max']).to.equal('Carmen');
-      expect(results['left']['inclusive']).to.equal(false);
+      expect(results['left']['inclusive']).to.equal('none');
     });
 
     it('parses example: jakarta apache', () => {
