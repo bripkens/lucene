@@ -1,5 +1,5 @@
 {
-  "name": "lucene",
+  "name": "lucene-deviation",
   "version": "1.2.0",
   "description": "Lucene query parser and formatter for JavaScript created using PEG.js",
   "main": "lib/lucene.js",
