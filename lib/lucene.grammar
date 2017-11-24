@@ -6,6 +6,7 @@
  *
  * Supported features:
  * - conjunction operators (AND, OR, ||, &&, NOT, AND NOT, OR NOT)
+ * - conjunction operators (and, or, not, and not, or not)
  * - prefix operators (+, -)
  * - quoted values ("foo bar")
  * - named fields (foo:bar)
@@ -190,7 +191,7 @@ field_exp
     }
 
 fieldname
-  = fieldname:unquoted_term [:]
+  = fieldname:unquoted_term [:] _*
     {
         return fieldname;
     }
@@ -368,6 +369,26 @@ operator
   / 'OR'
   / 'AND'
   / 'NOT'
+  / 'or not'
+    {
+      return 'OR NOT';
+    }
+  / 'and not'
+    {
+      return 'AND NOT';
+    }
+  / 'or'
+    {
+      return 'OR';
+    }
+  / 'and'
+    {
+      return 'AND';
+    }
+  / 'not'
+    {
+      return 'NOT';
+    }
   / '||'
   / '&&'
   / '!'

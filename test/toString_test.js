@@ -115,6 +115,18 @@ describe('toString', () => {
     testStr('fizz NOT buzz');
   });
 
+  it('must support explicit conjunction operators (or)', () => {
+    testStr('fizz or buzz', 'fizz OR buzz');
+  });
+
+  it('must support explicit conjunction operators (and)', () => {
+    testStr('fizz and buzz', 'fizz AND buzz');
+  });
+
+  it('must support explicit conjunction operators (not)', () => {
+    testStr('fizz not buzz', 'fizz NOT buzz');
+  });
+
   it('must support explicit conjunction operators (&&)', () => {
     testStr('fizz && buzz');
   });
