@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - Support whitespace between colon and term.
+
 ## 1.2.0
  - Support mixed inclusive/exclusive range delimiters
 
