@@ -26,6 +26,13 @@ describe('queryParser', () => {
       expect(results['left']['term']).to.equal('Foo');
     });
 
+    it('handles whitespace between colon and term', () => {
+      var results = lucene.parse('foo: bar');
+
+      expect(results['left']['field']).to.equal('foo');
+      expect(results['left']['term']).to.equal('bar');
+    });
+
     function isEmpty(arr) {
       for (var i in arr) {
         return false;
