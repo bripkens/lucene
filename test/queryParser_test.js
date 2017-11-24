@@ -26,6 +26,13 @@ describe('queryParser', () => {
       expect(results['left']['term']).to.equal('Foo');
     });
 
+    it('handles whitespace between colon and term', () => {
+      var results = lucene.parse('foo: bar');
+
+      expect(results['left']['field']).to.equal('foo');
+      expect(results['left']['term']).to.equal('bar');
+    });
+
     function isEmpty(arr) {
       for (var i in arr) {
         return false;
@@ -198,6 +205,37 @@ describe('queryParser', () => {
 
       expect(results['left']['term']).to.equal('fizz');
       expect(results['operator']).to.equal('NOT');
+      expect(results['right']['term']).to.equal('buzz');
+    });
+
+    it('parses implicit conjunction operator (or)', () => {
+      var results = lucene.parse('fizz buzz');
+      expect(results['left']['term']).to.equal('fizz');
+      expect(results['operator']).to.equal('<implicit>');
+      expect(results['right']['term']).to.equal('buzz');
+    });
+
+    it('parses explicit conjunction operator (and)', () => {
+      var results = lucene.parse('fizz and buzz');
+
+      expect(results['left']['term']).to.equal('fizz');
+      expect(results['operator']).to.equal('and');
+      expect(results['right']['term']).to.equal('buzz');
+    });
+
+    it('parses explicit conjunction operator (or)', () => {
+      var results = lucene.parse('fizz or buzz');
+
+      expect(results['left']['term']).to.equal('fizz');
+      expect(results['operator']).to.equal('or');
+      expect(results['right']['term']).to.equal('buzz');
+    });
+
+    it('parses explicit conjunction operator (not)', () => {
+      var results = lucene.parse('fizz not buzz');
+
+      expect(results['left']['term']).to.equal('fizz');
+      expect(results['operator']).to.equal('not');
       expect(results['right']['term']).to.equal('buzz');
     });
 
