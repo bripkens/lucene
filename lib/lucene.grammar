@@ -369,11 +369,26 @@ operator
   / 'OR'
   / 'AND'
   / 'NOT'
-  // 'or not'
+  / 'or not'
+    {
+      return 'OR NOT';
+    }
   / 'and not'
+    {
+      return 'AND NOT';
+    }
   / 'or'
+    {
+      return 'OR';
+    }
   / 'and'
+    {
+      return 'AND';
+    }
   / 'not'
+    {
+      return 'NOT';
+    }
   / '||'
   / '&&'
   / '!'

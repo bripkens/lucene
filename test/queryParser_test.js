@@ -219,7 +219,7 @@ describe('queryParser', () => {
       var results = lucene.parse('fizz and buzz');
 
       expect(results['left']['term']).to.equal('fizz');
-      expect(results['operator']).to.equal('and');
+      expect(results['operator']).to.equal('AND');
       expect(results['right']['term']).to.equal('buzz');
     });
 
@@ -227,7 +227,7 @@ describe('queryParser', () => {
       var results = lucene.parse('fizz or buzz');
 
       expect(results['left']['term']).to.equal('fizz');
-      expect(results['operator']).to.equal('or');
+      expect(results['operator']).to.equal('OR');
       expect(results['right']['term']).to.equal('buzz');
     });
 
@@ -235,7 +235,7 @@ describe('queryParser', () => {
       var results = lucene.parse('fizz not buzz');
 
       expect(results['left']['term']).to.equal('fizz');
-      expect(results['operator']).to.equal('not');
+      expect(results['operator']).to.equal('NOT');
       expect(results['right']['term']).to.equal('buzz');
     });
 
