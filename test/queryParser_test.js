@@ -363,6 +363,16 @@ describe('queryParser', () => {
         title:(+return +"pink panther")
     */
 
+    it('parses example: title:"The Right Way" NOT(text:go)', () => {
+      var results = lucene.parse('title:"The Right Way" AND text:go');
+
+      expect(results['left']['field']).to.equal('title');
+      expect(results['left']['term']).to.equal('The Right Way');
+      expect(results['operator']).to.equal('AND');
+      expect(results['right']['field']).to.equal('text');
+      expect(results['right']['term']).to.equal('go');
+    });
+
     it('parses example: title:"The Right Way" AND text:go', () => {
       var results = lucene.parse('title:"The Right Way" AND text:go');
 
