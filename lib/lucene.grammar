@@ -357,6 +357,10 @@ operator_exp
     {
         return operator;
     }
+  / _* operator:operator &"("
+    {
+        return operator;
+    }
   / _* operator:operator EOF
     {
         return operator;
