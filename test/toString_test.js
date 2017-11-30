@@ -247,6 +247,10 @@ describe('toString', () => {
     testStr('foo:"start \\" end"');
   });
 
+  it('must support lucene example: title:"The Right Way" AND(text:go)', () => {
+    testStr('title:"The Right Way" AND (text:go)');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected);
   }
