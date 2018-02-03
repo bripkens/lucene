@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0
  - Support whitespace between colon and term.
  - Include offset information.
 
