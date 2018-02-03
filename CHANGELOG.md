@@ -2,6 +2,7 @@
 
 ## Unreleased
  - Support whitespace between colon and term.
+ - Include offset information.
 
 ## 1.2.0
  - Support mixed inclusive/exclusive range delimiters

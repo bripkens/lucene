@@ -93,7 +93,7 @@ node
   = operator:operator_exp EOF
     {
         return {
-            'operator': operator
+            'operator': operator,
         };
     }
   / start:operator_exp left:group_exp operator:operator_exp* right:node*
@@ -163,24 +163,35 @@ field_exp
   = fieldname:fieldname? range:range_operator_exp
     {
         range['field'] =
-            fieldname == '' || fieldname == null
+            fieldname == null || fieldname.label == ''
                 ? "<implicit>"
-                : fieldname;
+                : fieldname.label;
+        range['fieldLocation'] =
+        fieldname == null || fieldname.label == ''
+            ? null
+            : fieldname.location;
 
         return range;
     }
   / fieldname:fieldname node:paren_exp
     {
-        node['field']= fieldname;
+        node['field']= fieldname.label;
+        node['fieldLocation'] = fieldname.location;
         return node;
     }
   / fieldname:fieldname? term:term
     {
         var fieldexp = {
             'field':
-                fieldname == '' || fieldname == null
+                fieldname == null || fieldname.label == ''
                     ? "<implicit>"
-                    : fieldname
+                    : fieldname.label,
+            'fieldLocation':
+                fieldname == null || fieldname.label == ''
+                    ? null
+                    : fieldname.location,
+
+
             };
 
         for(var key in term)
@@ -192,7 +203,11 @@ field_exp
 fieldname
   = fieldname:unquoted_term [:] _*
     {
-        return fieldname;
+        return {
+          label: fieldname.label,
+          location: fieldname.location
+        }
+
     }
 
 term
@@ -200,7 +215,8 @@ term
       {
         var result = {
           'term': term,
-          'quoted': true
+          'quoted': true,
+          'termLocation': location()
         };
 
         if('' != proximity)
@@ -221,8 +237,9 @@ term
   / op:prefix_operator_exp? term:unquoted_term similarity:fuzzy_modifier? boost:boost_modifier? _*
     {
         var result = {
-          'term': term,
-          'quoted': false
+          'term': term.label,
+          'quoted': false,
+          'termLocation': location()
         };
         if('' != similarity)
         {
@@ -251,7 +268,10 @@ ranged_term
 unquoted_term
   = term:term_char+
     {
-        return term.join('');
+        return {
+          label: term.join(''),
+          location: location(),
+        };
     }
 
 term_char

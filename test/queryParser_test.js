@@ -603,6 +603,10 @@ describe('queryParser', () => {
     it('must throw on missing brace', () => {
       expect(() => lucene.parse('(foo:bar')).to.throw(/SyntaxError: Expected/);
     });
+
+    it('must throw on missing brace', () => {
+      expect(() => lucene.parse('foo:')).to.throw(/SyntaxError: Expected/);
+    });
   });
 
   describe('escaped sequences in quoted terms', () => {
@@ -616,6 +620,16 @@ describe('queryParser', () => {
       var results = lucene.parse('"a\\"b" "c\\"d"');
       expect(results.left.term).to.equal('a"b');
       expect(results.right.term).to.equal('c"d');
+    });
+  });
+
+  describe('whitespace handling', () => {
+    it('handles empty string', () => {
+      var results = lucene.parse('test:Foo');
+      expect(results['left']['fieldLocation'].start.offset).to.equal(0);
+      expect(results['left']['fieldLocation'].end.offset).to.equal(4);
+      expect(results['left']['termLocation'].start.offset).to.equal(5);
+      expect(results['left']['termLocation'].end.offset).to.equal(8);
     });
   });
 });
