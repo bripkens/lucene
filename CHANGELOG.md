@@ -1,6 +1,29 @@
 # Changelog
 
 ## Unreleased
+The AST previously tried (and failed very often) to store unescaped
+terms within the AST. For a long time, this was buggy and actually resulted in an unclear role of the AST.
+Especially undefined was whether or not the `term` field in an AST should contain escaped or unescaped
+content.
+
+With this `2.0.0` release, the meaning of the `term` field within the AST is changed. If you previously worked with
+the AST directly and if you…
+
+ 1. relied on the `term` field containing unescaped input or
+ 2. set new values into the `term` field hoping that this this module would auto escape it,
+
+then you will need to change your code!
+
+When setting the `term` field, make sure that it is indeed valid, as it is copied verbatim to the output
+when using `toString`. Should you be inserting user input, then you can use one of the new escaping helpers,
+e.g. `lucene.term.escape('foo bar')`, to ensure that it is properly escaped.
+
+When reading the `term` field, do accept that it can contain escape sequences. Unescape helpers exist which
+should come in handy should you have to process these values, e.g. `lucene.term.unescape('foo\\ bar')`.
+
+ - **Breaking**: Store escaped terms in AST.
+ - Add helpers to escape (`lucene.term.escape('foo bar')`) and unescape (`lucene.term.unescape('foo\\ bar')`) terms.
+ - Add helpers to escape (`lucene.phrase.escape('foo"bar')`) and unescape (`lucene.phrase.unescape('foo\\"bar')`) phrases.
  - Support empty quoted terms in `toString`.
 
 ## 1.3.0

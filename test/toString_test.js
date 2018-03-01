@@ -255,13 +255,19 @@ describe('toString', () => {
     testStr('foo:"start \\" end"');
   });
 
+  it('must support escaped characters', () => {
+    testStr('foo\\(\\)\\{\\}\\+\\~\\!\\?\\[\\]\\:\\*bar');
+  });
+
+  it('must support escaped whitespace', () => {
+    testStr('foo:a\\ b');
+  });
+
   function testAst(ast, expected) {
-    expect(lucene.toString(ast)).to.equal(expected);
+    expect(lucene.toString(ast)).to.equal(expected, 'Got the following AST: ' + JSON.stringify(ast, 0, 2));
   }
 
   function testStr(str, expected) {
-    const ast = lucene.parse(str);
-    expect(lucene.toString(ast))
-      .to.equal(expected || str, 'Got the following AST: ' + JSON.stringify(ast, 0, 2));
+    testAst(lucene.parse(str), expected != null ? expected : str);
   }
 });

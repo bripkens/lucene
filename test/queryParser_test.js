@@ -613,18 +613,56 @@ describe('queryParser', () => {
     it('must support simple quote escape', () => {
       var results = lucene.parse('foo:"a\\"b"');
       expect(results.left.field).to.equal('foo');
-      expect(results.left.term).to.equal('a"b');
+      expect(results.left.term).to.equal('a\\"b');
     });
 
     it('must support multiple quoted terms', () => {
       var results = lucene.parse('"a\\"b" "c\\"d"');
-      expect(results.left.term).to.equal('a"b');
-      expect(results.right.term).to.equal('c"d');
+      expect(results.left.term).to.equal('a\\"b');
+      expect(results.right.term).to.equal('c\\"d');
+    });
+
+    it('must correctly escapes other reserved characters', () => {
+      var results = lucene.parse('"a\\:b" "c\\~d\\+\\-\\?\\*"');
+      expect(results.left.term).to.equal('a\\:b');
+      expect(results.right.term).to.equal('c\\~d\\+\\-\\?\\*');
     });
   });
 
-  describe('whitespace handling', () => {
-    it('handles empty string', () => {
+  describe('escaped sequences in unquoted terms', () => {
+    it('must escape a + character', () => {
+      var results = lucene.parse('foo\\: asdf');
+      expect(results.left.term).to.equal('foo\\:');
+      expect(results.right.term).to.equal('asdf');
+    });
+
+    it('must escape brackets, braces, and parenthesis characters', () => {
+      var results = lucene.parse('a\\(b\\)\\{c\\}\\[d\\]e');
+      expect(results.left.term).to.equal('a\\(b\\)\\{c\\}\\[d\\]e');
+    });
+
+    it('must respect quoted whitespace', () => {
+      var results = lucene.parse('foo:a\\ b');
+      expect(results.left.term).to.equal('a\\ b');
+    });
+
+    it('must respect quoted and unquoted whitespace', () => {
+      var results = lucene.parse('foo:a\\ b c\\ d');
+      expect(results.left.term).to.equal('a\\ b');
+      expect(results.right.term).to.equal('c\\ d');
+    });
+  });
+
+  describe('escaped sequences field names', () => {
+    it('escape', () => {
+      var results = lucene.parse('foo\\~bar: asdf');
+      expect(results.left.field).to.equal('foo\\~bar');
+      expect(results.left.term).to.equal('asdf');
+    });
+  });
+
+  describe('position information', () => {
+    it('retains position information', () => {
       var results = lucene.parse('test:Foo');
       expect(results['left']['fieldLocation'].start.offset).to.equal(0);
       expect(results['left']['fieldLocation'].end.offset).to.equal(4);

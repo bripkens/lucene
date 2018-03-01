@@ -257,7 +257,9 @@ term
     }
 
 rterm_char
-  = '.' / [^ \t\r\n\f\{\}()"/^~\[\]]
+  = "\\" sequence:EscapeSequence { return '\\' + sequence; }
+  / '.' / [^ \t\r\n\f\{\}()"/^~\[\]]
+
 
 ranged_term
   = term:rterm_char+
@@ -275,14 +277,16 @@ unquoted_term
     }
 
 term_char
-  = '.' / [^: \t\r\n\f\{\}()"/^~\[\]]
+  = "\\" sequence:EscapeSequence { return '\\' + sequence; }
+  / '.' / [^: \t\r\n\f\{\}()"/^~\[\]]
+
 
 quoted_term
   = '"' chars:DoubleStringCharacter* '"' { return chars.join(''); }
 
 DoubleStringCharacter
   = !('"' / "\\") char:. { return char; }
-  / "\\" sequence:EscapeSequence { return sequence; }
+  / "\\" sequence:EscapeSequence { return '\\' + sequence; }
 
 EscapeSequence
   = "+"
@@ -303,6 +307,9 @@ EscapeSequence
   / "|"
   / "'"
   / "/"
+  / "~"
+  / "*"
+  / " "
 
 proximity_modifier
   = '~' proximity:int_exp

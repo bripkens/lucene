@@ -14,6 +14,8 @@ Parse, modify and stringify lucene queries.
 
 ```
 npm install --save lucene
+-or-
+yarn add lucene
 ```
 
 ## Usage
@@ -41,9 +43,9 @@ console.log(lucene.toString(ast));
 
 
 ## Grammar
-The parser is auto-generated from a PEG implementation in JavaScript called [PEG.js](http://pegjs.majda.cz/).
+The parser is auto-generated from a PEG implementation in JavaScript called [PEG.js](https://pegjs.org/).
 
-To test the grammar without using the generated parser, or if you want to modify it, try out [PEG.js online](http://pegjs.majda.cz/online). This is a handy way to test arbitrary queries and see what the results will be like or debug a problem with the parser for a given piece of data.
+To test the grammar without using the generated parser, or if you want to modify it, try out [PEG.js online](http://pegjs.org/online). This is a handy way to test arbitrary queries and see what the results will be like or debug a problem with the parser for a given piece of data.
 
 
 ## History
