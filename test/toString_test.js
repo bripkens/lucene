@@ -44,11 +44,11 @@ describe('toString', () => {
   });
 
   it('must support terms with \'-\'', () => {
-    testStr('created_at:>now-5d');
+    testStr('created_at:>now\\-5d');
   });
 
   it('must support terms with \'+\'', () => {
-    testStr('created_at:>now+5d');
+    testStr('created_at:>now\\+5d');
   });
 
   it('must support prefix operators (-)', () => {
@@ -68,7 +68,7 @@ describe('toString', () => {
   });
 
   it('must support dates as terms', () => {
-    testStr('foo:2015-01-01');
+    testStr('foo:2015\\-01\\-01');
   });
 
   it('must support dots in field names', () => {
@@ -245,6 +245,10 @@ describe('toString', () => {
 
   it('must support strings with quotes', () => {
     testStr('foo:"start \\" end"');
+  });
+
+  it('must support escaped characters', () => {
+    testStr('foo\\(\\)\\{\\}\\+\\~\\!\\?\\[\\]\\:\\*bar');
   });
 
   function testAst(ast, expected) {

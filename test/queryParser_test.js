@@ -613,13 +613,40 @@ describe('queryParser', () => {
     it('must support simple quote escape', () => {
       var results = lucene.parse('foo:"a\\"b"');
       expect(results.left.field).to.equal('foo');
-      expect(results.left.term).to.equal('a"b');
+      expect(results.left.term).to.equal('a\\"b');
     });
 
     it('must support multiple quoted terms', () => {
       var results = lucene.parse('"a\\"b" "c\\"d"');
-      expect(results.left.term).to.equal('a"b');
-      expect(results.right.term).to.equal('c"d');
+      expect(results.left.term).to.equal('a\\"b');
+      expect(results.right.term).to.equal('c\\"d');
+    });
+
+    it('Correctly escapes other reserved characters', () => {
+      var results = lucene.parse('"a\\:b" "c\\~d\\+\\-\\?\\*"');
+      expect(results.left.term).to.equal('a\\:b');
+      expect(results.right.term).to.equal('c\\~d\\+\\-\\?\\*');
+    });
+  });
+
+  describe('escaped sequences in unquoted terms', () => {
+    it('Escape a + character', () => {
+      var results = lucene.parse('foo\\: asdf');
+      expect(results.left.term).to.equal('foo\\:');
+      expect(results.right.term).to.equal('asdf');
+    });
+
+    it('Escape brackets, braces, and parenthesis characters', () => {
+      var results = lucene.parse('a\\(b\\)\\{c\\}\\[d\\]e');
+      expect(results.left.term).to.equal('a\\(b\\)\\{c\\}\\[d\\]e');
+    });
+  });
+
+  describe('escaped sequences field names', () => {
+    it('Escape', () => {
+      var results = lucene.parse('foo\\~bar: asdf');
+      expect(results.left.field).to.equal('foo\\~bar');
+      expect(results.left.term).to.equal('asdf');
     });
   });
 
