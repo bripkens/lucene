@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.0
 The AST previously tried (and failed very often) to store unescaped
 terms within the AST. For a long time, this was buggy and actually resulted in an unclear role of the AST.
 Especially undefined was whether or not the `term` field in an AST should contain escaped or unescaped
