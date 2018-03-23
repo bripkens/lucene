@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - Support empty quoted terms in `toString`.
+
 ## 1.3.0
  - Support whitespace between colon and term.
  - Include offset information.

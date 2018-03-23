@@ -27,6 +27,10 @@ describe('toString', () => {
     testStr('"fizz buz"');
   });
 
+  it('must handle empty quoted terms', () => {
+    testStr('""');
+  });
+
   it('must support field groups', () => {
     testStr('foo:(bar OR baz)');
   });
@@ -77,6 +81,10 @@ describe('toString', () => {
 
   it('must support quoted string with explicit field names', () => {
     testStr('foo:"fizz buzz"');
+  });
+
+  it('must support empty quoted string with explicit field names', () => {
+    testStr('foo:""');
   });
 
   it('must support prefixes and explicit field names (-)', () => {
