@@ -1,6 +1,6 @@
 {
   "name": "lucene",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Lucene query parser and formatter for JavaScript created using PEG.js",
   "main": "lib/lucene.js",
   "files": [

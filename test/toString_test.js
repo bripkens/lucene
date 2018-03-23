@@ -255,6 +255,10 @@ describe('toString', () => {
     testStr('foo:"start \\" end"');
   });
 
+  it('must support escaped characters', () => {
+    testStr('foo\\(\\)\\{\\}\\+\\~\\!\\?\\[\\]\\:\\*bar');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected);
   }
