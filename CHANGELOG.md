@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - `*` and `~` are not escaped/unescaped by the helpers introduced in release 2.0.0.
+
 ## 2.0.0
 The AST previously tried (and failed very often) to store unescaped
 terms within the AST. For a long time, this was buggy and actually resulted in an unclear role of the AST.
