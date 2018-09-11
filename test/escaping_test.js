@@ -19,6 +19,10 @@ describe('escaping', () => {
     it('must escape phrases', () => {
       expect(lucene.phrase.escape('foo"bar')).to.equal('foo\\"bar');
     });
+
+    it('must escape line breaks', () => {
+      expect(lucene.term.escape('a\nb')).to.equal('a\\\nb');
+    });
   });
 
   describe('unescape', () => {
@@ -34,6 +38,10 @@ describe('escaping', () => {
 
     it('must unescape phrases', () => {
       expect(lucene.phrase.unescape('foo\\"bar')).to.equal('foo"bar');
+    });
+
+    it('must unescape line breaks', () => {
+      expect(lucene.term.unescape('a\\\nb')).to.equal('a\nb');
     });
   });
 });

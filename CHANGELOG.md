@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.2
+ - Escape all whitespace characters in escaping / unescaping helpers.
+
 ## 2.0.1
  - `*` and `~` are not escaped/unescaped by the helpers introduced in release 2.0.0.
 
