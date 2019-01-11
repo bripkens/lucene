@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.0.3
  - Support leading whitespace in parenthesis.
 
 ## 2.0.2
