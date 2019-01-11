@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+ - Support leading whitespace in parenthesis.
+
 ## 2.0.2
  - Escape all whitespace characters in escaping / unescaping helpers.
 
@@ -40,7 +43,7 @@ should come in handy should you have to process these values, e.g. `lucene.term.
  - Support mixed inclusive/exclusive range delimiters
 
 ## 1.1.3
- - Fix malformed `toString` output when using paranthesis.
+ - Fix malformed `toString` output when using parenthesis.
 
 ## 1.1.2
  - Upgrade to pegjs 0.8

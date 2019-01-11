@@ -263,6 +263,10 @@ describe('toString', () => {
     testStr('foo:a\\ b');
   });
 
+  it('must support whitespace in parens', () => {
+    testStr('foo ( bar OR baz)', 'foo (bar OR baz)');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected, 'Got the following AST: ' + JSON.stringify(ast, 0, 2));
   }

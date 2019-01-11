@@ -150,7 +150,7 @@ group_exp
   / paren_exp
 
 paren_exp
-  = "(" node:node+ ")" _*
+  = "(" _* node:node+ ")" _*
     {
         node[0]['parenthesized'] = true;
         return node[0];

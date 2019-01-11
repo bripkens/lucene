@@ -597,6 +597,16 @@ describe('queryParser', () => {
       expect(results['right']['field']).to.equal('<implicit>');
       expect(results['right']['term']).to.equal('android');
     });
+
+    it('must handle whitespace in parens', () => {
+      var result = lucene.parse('foo ( bar OR baz)');
+      expect(result.left.field).to.equal('<implicit>');
+      expect(result.left.term).to.equal('foo');
+      expect(result.operator).to.equal('<implicit>');
+      expect(result.right.left.term).to.equal('bar');
+      expect(result.right.operator).to.equal('OR');
+      expect(result.right.right.term).to.equal('baz');
+    });
   });
 
   describe('syntax errors', () => {
