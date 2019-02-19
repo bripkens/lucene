@@ -1,1 +1,2 @@
-lib/queryParser.js
+lib/
+src/queryParser.js

@@ -1,8 +1,7 @@
-'use strict';
 
 var implicit = '<implicit>';
 
-module.exports = function toString(ast) {
+export function toString(ast) {
   if (!ast) {
     return '';
   }
@@ -97,4 +96,4 @@ module.exports = function toString(ast) {
   }
 
   return result;
-};
+}
