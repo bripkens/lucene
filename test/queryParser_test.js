@@ -78,6 +78,13 @@ describe('queryParser', () => {
       expect(results['left']['prefix']).to.equal('-');
     });
 
+    it('parses prefix operator (!)', () => {
+      var results = lucene.parse('!bar');
+
+      expect(results['left']['term']).to.equal('bar');
+      expect(results['left']['prefix']).to.equal('!');
+    });
+
     it('parses prefix operator (+)', () => {
       var results = lucene.parse('+bar');
 
@@ -90,6 +97,13 @@ describe('queryParser', () => {
 
       expect(results['left']['term']).to.equal('fizz buzz');
       expect(results['left']['prefix']).to.equal('-');
+    });
+
+    it('parses prefix operator on quoted term (!)', () => {
+      var results = lucene.parse('!"fizz buzz"');
+
+      expect(results['left']['term']).to.equal('fizz buzz');
+      expect(results['left']['prefix']).to.equal('!');
     });
 
     it('parses prefix operator on quoted term (+)', () => {

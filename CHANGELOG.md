@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.4
+ - Support `!` prefix.
+
 ## 2.0.3
  - Support leading whitespace in parenthesis.
 

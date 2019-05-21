@@ -267,6 +267,10 @@ describe('toString', () => {
     testStr('foo ( bar OR baz)', 'foo (bar OR baz)');
   });
 
+  it('must support ! prefix operator', () => {
+    testStr('-author:adams');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected, 'Got the following AST: ' + JSON.stringify(ast, 0, 2));
   }
