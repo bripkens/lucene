@@ -397,7 +397,6 @@ operator
   / 'NOT'
   / '||'
   / '&&'
-  / '!'
 
 prefix_operator_exp
   = _* operator:prefix_operator
@@ -408,6 +407,7 @@ prefix_operator_exp
 prefix_operator
   = '+'
   / '-'
+  / '!'
 
 _ "whitespace"
   = [ \t\r\n\f]+
