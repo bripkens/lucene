@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.0
+ - Support regular expression terms.
+
 ## 2.0.4
  - Support `!` prefix.
 
