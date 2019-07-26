@@ -48,12 +48,23 @@ describe('queryParser', () => {
       var results = lucene.parse('bar');
 
       expect(results['left']['term']).to.equal('bar');
+      expect(results['left']['quoted']).to.be.false;
+      expect(results['left']['regex']).to.be.false;
     });
 
     it('parses quoted terms', () => {
       var results = lucene.parse('"fizz buzz"');
 
       expect(results['left']['term']).to.equal('fizz buzz');
+      expect(results['left']['quoted']).to.be.true;
+      expect(results['left']['regex']).to.be.false;
+    });
+
+    it('parses regex terms', () => {
+      var results = lucene.parse('/f[A-z]?o*/');
+      expect(results['left']['term']).to.equal('f[A-z]?o*');
+      expect(results['left']['quoted']).to.be.false;
+      expect(results['left']['regex']).to.be.true;
     });
 
     it('accepts terms with \'-\'', () => {

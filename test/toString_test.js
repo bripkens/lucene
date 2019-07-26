@@ -55,6 +55,10 @@ describe('toString', () => {
     testStr('created_at:>now+5d');
   });
 
+  it('must support regex terms', () => {
+    testStr('/^fizz b?u[A-z]/');
+  });
+
   it('must support prefix operators (-)', () => {
     testStr('-bar');
   });
