@@ -283,6 +283,10 @@ describe('toString', () => {
     testStr('prop:value1 AND (NOT _exists_:other OR other:value2)');
   });
 
+  it('must support parenthesized expressions with start set and not', () => {
+    testStr('prop:value1 AND (NOT _exists_:other OR other:value2)', 'prop:value1 AND (NOT _exists_:other OR other:value2)');
+  });
+
   function testAst(ast, expected) {
     expect(lucene.toString(ast)).to.equal(expected, 'Got the following AST: ' + JSON.stringify(ast, 0, 2));
   }
