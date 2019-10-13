@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.1
+ - Fix `toString` for parenthesized `NOT`.
+
 ## 2.1.0
  - Support regular expression terms.
 
