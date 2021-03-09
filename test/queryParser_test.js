@@ -333,6 +333,13 @@ describe('queryParser', () => {
       expect(results['left']['term_max']).to.equal('2017-11-18T04:28:11.999Z');
       expect(results['left']['inclusive']).to.equal('right');
     });
+
+    it('parses a quoted term in a range expression', () => {
+      var results = lucene.parse('date:["3/daysAgo" TO Today]');
+      expect(results['left']['field']).to.equal('date');
+      expect(results['left']['term_min']).to.equal('3/daysAgo');
+      expect(results['left']['term_max']).to.equal('Today');
+    });
   });
 
   describe('Lucene Query syntax documentation examples', () => {
