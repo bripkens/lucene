@@ -277,10 +277,8 @@ rterm_char
 
 
 ranged_term
-  = term:rterm_char+
-    {
-        return term.join('');
-    }
+  = term:rterm_char+ { return term.join(''); }
+  / term:quoted_term
 
 unquoted_term
   = term:term_char+
