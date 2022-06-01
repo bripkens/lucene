@@ -1,4 +1,4 @@
-# lucene &nbsp; [![Build Status](https://travis-ci.org/bripkens/lucene.svg?branch=master)](https://travis-ci.org/bripkens/lucene) [![Dependency Status](https://david-dm.org/bripkens/lucene/master.svg)](https://david-dm.org/bripkens/lucene/master) [![Coverage Status](https://img.shields.io/coveralls/bripkens/lucene.svg)](https://coveralls.io/r/bripkens/lucene?branch=master) [![npm version](https://badge.fury.io/js/lucene.svg)](https://badge.fury.io/js/lucene)
+# lucene &nbsp; [![Build Status](https://travis-ci.org/bripkens/lucene.svg?branch=master)](https://travis-ci.org/bripkens/lucene) [![Coverage Status](https://img.shields.io/coveralls/bripkens/lucene.svg)](https://coveralls.io/r/bripkens/lucene?branch=master) [![npm version](https://badge.fury.io/js/lucene.svg)](https://badge.fury.io/js/lucene)
 
 Parse, modify and stringify lucene queries.
 
